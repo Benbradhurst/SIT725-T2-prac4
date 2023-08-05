@@ -1,28 +1,44 @@
-const cardList = [
-    {
-        title: "Kitten 2",
-        image: "images/kitten-2.jpeg",
-        link: "About Kitten 2",
-        desciption: "Demo desciption about kitten 2"
-    },
-    {
-        title: "Kitten 3",
-        image: "images/kitten_3.webp",
-        link: "About Kitten 3",
-        desciption: "Demo desciption about kitten 3"
-    }
-]
+
 const clickMe = () => {
     alert("Thanks for clicking me. Hope you have a nice day!")
 }
 const submitForm = () => {
     let formData = {};
-    formData.first_name = $('#first_name').val();
-    formData.last_name = $('#last_name').val();
-    formData.password = $('#password').val();
-    formData.email = $('#email').val();
+    formData.title = $('#title').val();
+    formData.subTitle = $('#subTitle').val();
+    formData.path = $('#path').val();
+    formData.description = $('#description').val();
     console.log("Form Data Submitted: ", formData);
+    postCat(formData);
 }
+
+function postCat(formData){
+    $.ajax({
+        url:'/api/cat',
+        type:'POST',
+        data:cat,
+        success: (result)=>{
+            if (result.statusCode === 201){
+                alert("cat post successful");
+            }
+        }
+    });
+}
+
+function getAllCats() {
+    $.get('/api/cats', (response)=>{
+        //response is in array format
+        if (response.statusCode === 200) {
+            addCards(response.data);
+            console.log('cards added')
+        }
+        else {
+            console.log(err)
+        }
+        
+    });
+}
+
 const addCards = (items) => {
     items.forEach(item => {
         let itemToAppend = '<div class="col s4 center-align">' +
@@ -36,12 +52,13 @@ const addCards = (items) => {
         $("#card-section").append(itemToAppend)
     });
 }
+
 $(document).ready(function () {
     $('.materialboxed').materialbox();
     $('modal').modal();
     $('#formSubmit').click(() => {
         submitForm();
     })
-    addCards(cardList);
     $('.modal').modal();
+    getAllCats();
 });
