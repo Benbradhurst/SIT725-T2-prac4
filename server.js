@@ -27,32 +27,29 @@ async function runDBConnection() {
     }
 }
 
-app.get('/', (req, res) => {
-    res.sendFile('index.html');
-})
+app.get('/', function (req, res) {
+    res.render('index.html');
+});
 
 app.get('/api/cats', (req, res) =>{
     getAllCats((err,result)=> {
         if (!err) {
             res.json({ statusCode: 200, data:result, message: 'get all cats successful' });
         }
-        else{
-            console.log(err);
-        }
     });
 })
 
-app.post('/api/cat', (req, res) => {
+app.post('/api/cat', (req, res)=>{
     let cat = req.body;
-    postCat(cat, (err, result) => {
+    postCat(cat, (err, result)=>{
         if (!err) {
-            res.json({ statusCode: 201, data: result, message: 'success' });
+            res.json({statusCode:201, data:result, message:'success' });
         }
     });
 })
 
 function postCat(cat, callback) {
-    collection.insertOne(cat, callback);
+    collection.insertOne(cat,callback);
 }
 
 function getAllCats(callback) {
@@ -64,5 +61,5 @@ app.listen(port, () => {
     console.log("Server live at http://localhost:" + port)
     console.log("Type Ctrl+C to shut down");
     runDBConnection();
-})
+});
 
