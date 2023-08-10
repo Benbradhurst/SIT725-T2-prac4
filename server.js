@@ -48,7 +48,7 @@ app.post('/api/cat', (req, res)=>{
     });
 })
 
-function postCat(cat, callback) {
+function postCat(cat,callback) {
     collection.insertOne(cat,callback);
 }
 

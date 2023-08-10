@@ -13,32 +13,32 @@ const addCards = (items) => {
     });
 }
 
-const submitForm = () => {
+const formSubmitted = () => {
     let formData = {};
     formData.title = $('#title').val();
     formData.subTitle = $('#subTitle').val();
     formData.path = $('#path').val();
     formData.description = $('#description').val();
-    console.log("Form Data Submitted: ", formData);
+
+    console.log(formData);
     postCat(formData);
 }
-
 function postCat(cat){
     $.ajax({
         url:'/api/cat',
         type:'POST',
         data:cat,
         success: (result)=>{
-            if (result.statusCode === 201){
-                alert("cat post successful");
+            if (result.statusCode === 201) {
+                alert('cat post successful');
             }
         }
     });
 }
 
-function getAllCats() {
+function getAllCats(){
     $.get('/api/cats', (response)=>{
-        //response is in array format
+        // response's data is in array format, so we can use it
         if (response.statusCode === 200) {
             addCards(response.data);
         }
@@ -47,10 +47,10 @@ function getAllCats() {
 
 
 
-$(document).ready(function () {
+$(document).ready(function(){
     $('.materialboxed').materialbox();
-    $('#formSubmit').click(() => {
-        submitForm();
+    $('#formSubmit').click(()=>{
+        formSubmitted();
     });
     $('.modal').modal();
     getAllCats();
