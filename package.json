@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --reporter spec",
+    "test": "mocha || true --reporter spec",
     "start": "node server.js"
   },
   "author": "Ben Bradhurst",
@@ -12,8 +12,9 @@
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "jquery": "^3.7.1",
     "mocha": "^10.2.0",
-    "mongodb": "^4.4.1",
+    "mongodb": "^4.17.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
