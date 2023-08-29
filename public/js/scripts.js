@@ -1,5 +1,3 @@
-let postCats = false;
-
 
 const addCards = (items) => {
     items.forEach(item => {
@@ -25,7 +23,6 @@ const formSubmitted = () => {
     console.log(formData);
     postCat(formData);
 }
-
 function postCat(cat){
     $.ajax({
         url:'/api/cat',
@@ -34,13 +31,10 @@ function postCat(cat){
         success: (result)=>{
             if (result.statusCode === 201) {
                 alert('cat post successful');
-                postCats = true;
             }
         }
     });
 }
-
-
 
 function getAllCats(){
     $.get('/api/cat', (response)=>{
@@ -54,6 +48,8 @@ function getAllCats(){
         }
     });
 }
+
+
 
 $(document).ready(function(){
     $('.materialboxed').materialbox();

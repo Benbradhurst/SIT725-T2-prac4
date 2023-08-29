@@ -12,3 +12,4 @@ const client = new MongoClient(uri, {
 client.connect();
 
 module.exports = client;
+
