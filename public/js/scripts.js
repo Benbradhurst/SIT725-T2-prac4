@@ -13,6 +13,11 @@ const addCards = (items) => {
     });
 }
 
+let socket = io();
+socket.on('number',(message)=>{
+    console.log('the number is: '+message);
+});
+
 const formSubmitted = () => {
     let formData = {};
     formData.title = $('#title').val();
